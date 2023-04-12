@@ -1,12 +1,12 @@
 import { projects } from "./app";
 
-
 function updateProjects() {
   const projectListDiv = document.querySelector("#project-list");
-  projectListDiv.innerHTML= "";
+  projectListDiv.innerHTML = "";
   for (let i = 0; i < projects.length; i++) {
     const projectDiv = document.createElement("div");
     projectDiv.classList.add("project");
+    projectDiv.dataset.projectIndex = `${i}`;
     projectDiv.innerHTML = `
           <h3>${projects[i].name}</h3>
           <div class="project-actions">
@@ -24,6 +24,9 @@ function updateProjects() {
 
 function updateTodos(projectIndex) {
   const todoListDiv = document.querySelector(".todo-container");
+  const projectTitle = document.querySelector("#project-title");
+  projectTitle.textContent = `${projects[projectIndex].name}`;
+  todoListDiv.innerHTML = "";
   for (let i = 0; i < projects[projectIndex].todos.length; i++) {
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo");

@@ -1,5 +1,5 @@
 import { projects } from "./app";
-import { updateProjects } from "./dom";
+import { updateProjects, updateTodos } from "./dom";
 import { addProject, removeProject, editProjectName } from "./app";
 
 const projectAddModal = document.getElementById("projectAdd");
@@ -42,7 +42,9 @@ projectList.addEventListener("click", function (e) {
   }
   if (e.target.classList.contains("edit")) {
     projectEditModal.classList.add("show");
-    document.querySelector("#project-edit-name").value = `${projects[e.target.parentNode.getAttribute("data-project-index")].name}`;
+    document.querySelector("#project-edit-name").value = `${
+      projects[e.target.parentNode.getAttribute("data-project-index")].name
+    }`;
     projectEditForm.addEventListener("submit", function _listener(event) {
       event.preventDefault();
       projectEditModal.classList.remove("show");
@@ -53,5 +55,11 @@ projectList.addEventListener("click", function (e) {
       updateProjects();
       projectEditForm.removeEventListener("submit", _listener);
     });
+  }
+  if (e.target.classList.contains("project")) {
+    updateTodos(e.target.getAttribute("data-project-index"));
+  } else {
+    updateTodos(e.target.parentNode.getAttribute("data-project-index"));
+    console.log(e.target.parentNode.getAttribute("data-project-index"))
   }
 });

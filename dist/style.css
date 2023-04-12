@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, sans-serif;
   background-color: #F5F5F5;
 }
 
@@ -21,6 +21,11 @@ header h1 {
   text-align: center;
 }
 
+
+.container {
+  display: flex;
+}
+
 #projects,
 #todo-list,
 #todo-details {
@@ -31,8 +36,9 @@ header h1 {
 }
 
 #projects {
-  min-width: 20%;
-  float: left;
+  height: fit-content;
+  flex: 1;
+  overflow: hidden;
 }
 
 .project-header {
@@ -45,6 +51,7 @@ header h1 {
 
 .project {
   display: flex;
+  text-overflow: ellipsis;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
@@ -54,6 +61,13 @@ header h1 {
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.2s ease-in-out;
+}
+
+.project  h3 {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 5;
 }
 
 .project:hover {
@@ -307,7 +321,7 @@ header h1 {
 
 #todo-list {
   width: calc(100% - 440px);
-  float: right;
+  flex: 3;
 }
 
 .todo {
@@ -533,6 +547,9 @@ footer p {
 
 /* Media Queries */
 @media screen and (max-width: 768px) {
+  .container {
+    display: block;
+  }
   #projects {
     width: 100%;
     float: none;
