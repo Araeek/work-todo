@@ -16,8 +16,8 @@
     <div id="projects">
       <div class="project-header">
         <h2>Projects</h2>
-        <button id="projectAddBtn" class="add-project-btn"><i class="fas fa-plus"></i></button>
-        <div id="projectAdd" class="project-modal">
+        <button id="project-add-btn" class="add-project-btn"><i class="fas fa-plus"></i></button>
+        <div id="project-add" class="project-modal">
           <div class="project-modal-content">
             <span class="close-span">&times;</span>
             <h2 class="modal-heading">Add Project</h2>
@@ -28,7 +28,7 @@
             </form>
           </div>
         </div>
-        <div id="projectEdit" class="project-modal">
+        <div id="project-edit" class="project-modal">
           <div class="project-modal-content">
             <span class="close-span">&times;</span>
             <h2 class="modal-heading">Edit Project</h2>
@@ -39,13 +39,21 @@
             </form>
           </div>
         </div>
+        <div id="todo-add" class="todo-modal">
+          <div class="todo-modal-content">
+            <span class="close-span">&times;</span>
+          </div>
+        </div>
       </div>
       <div id="project-list"></div>
     </div>
 
     <div id="todo-list">
       <header class="todo-list-header">
-        <h2 id="project-title"></h2>
+        <div class="project-title-section">
+          <h2 id="project-title"></h2>
+          <button class="edit-project-btn"><i class="fas fa-edit edit"></i></button>
+        </div>
         <button class="add-todo-btn">Add Todo <i class="fas fa-plus"></i></button>
       </header>
       <div class="todo-header">
