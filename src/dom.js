@@ -22,25 +22,26 @@ function updateProjects() {
   }
 }
 
-function updateTodos(projectIndex) {
+function updateTodos(projectIndexNumber) {
   const todoListDiv = document.querySelector(".todo-container");
   const projectTitle = document.querySelector("#project-title");
-  projectTitle.textContent = `${projects[projectIndex].name}`;
+  projectTitle.textContent = `${projects[projectIndexNumber].name}`;
+  document.querySelector(".edit-project-btn").dataset.projectIndex = `${projectIndexNumber}`;
   todoListDiv.innerHTML = "";
-  for (let i = 0; i < projects[projectIndex].todos.length; i++) {
+  for (let i = 0; i < projects[projectIndexNumber].todos.length; i++) {
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo");
     todoDiv.innerHTML = `
-          <h3>${projects[projectIndex].todos[i].title}</h3>
+          <h3>${projects[projectIndexNumber].todos[i].title}</h3>
           <p>
             <input type="date" id="date" name="date" value=${
-              projects[projectIndex].todos[i].dueDate
+              projects[projectIndexNumber].todos[i].dueDate
             }>
           </p>
           <div class="todo-priority">
             <select class="priority-select">
               <option value="high" ${
-                projects[projectIndex].todos[i].priority === "high"
+                projects[projectIndexNumber].todos[i].priority === "high"
                   ? "selected"
                   : ""
               }>
@@ -48,7 +49,7 @@ function updateTodos(projectIndex) {
               <p class="priority-text-high">high</p>
               </option>
               <option value="medium" ${
-                projects[projectIndex].todos[i].priority === "medium"
+                projects[projectIndexNumber].todos[i].priority === "medium"
                   ? "selected"
                   : ""
               }>
@@ -56,7 +57,7 @@ function updateTodos(projectIndex) {
               <p class="priority-text-medium">medium</p>
               </option>
               <option value="low" ${
-                projects[projectIndex].todos[i].priority === "low"
+                projects[projectIndexNumber].todos[i].priority === "low"
                   ? "selected"
                   : ""
               }>
@@ -72,10 +73,10 @@ function updateTodos(projectIndex) {
               <input type="checkbox" name="checkbox">
               <span class="complete-todo-btn"></span>
             </label>
-            <button class="edit-todo-btn" data-project-index="${projectIndex}">
+            <button class="edit-todo-btn" data-project-index="${projectIndexNumber}">
               <i class="fas fa-edit"></i> 
             </button>
-            <button class="project-btn" data-project-index="${projectIndex}">
+            <button class="project-btn" data-project-index="${projectIndexNumber}">
               <i class="fas fa-trash-alt"></i>
             </button>
           </div>
