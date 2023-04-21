@@ -63,7 +63,7 @@ header h1 {
   transition: background-color 0.2s ease-in-out;
 }
 
-.project  h3 {
+.project h3 {
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -143,10 +143,165 @@ header h1 {
   border: 1px solid #888;
   border-radius: 20px;
   width: 30%;
-  height: 600px;
   position: relative;
   animation: slideIn 0.3s;
 }
+
+.todo-form-container {
+  width: 400px;
+  margin: 40px auto;
+  background-color: #f5f5f5;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.todo-form-heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.todo-form-label {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.todo-form-input,
+.todo-form-select,
+.todo-form-checkbox {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.todo-form-select {
+  background-color: #ff6060;
+  color: white;
+}
+
+.todo-add-complete {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.todo-add-complete > .todo-form-label {
+  margin: 0;
+}
+
+.todo-add-complete {
+  position: relative;
+  display: inline-block;
+}
+
+.todo-add-complete input {
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.complete-todo-btn-add {
+  position: absolute;
+  top: -3px;
+  left: -4px;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border: 2px solid #777;
+}
+
+.todo-add-complete:hover input~.complete-todo-btn-add {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+.todo-add-complete input:checked~.complete-todo-btn-add {
+  background-color: #4CAF50;
+}
+
+.complete-todo-btn-add:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.todo-add-complete input:checked~.complete-todo-btn-add:after {
+  display: block;
+}
+
+.todo-add-complete .todo-form-label {
+  margin-left: 30px;
+  line-height: 20px;
+  display: inline-block;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.complete-todo-btn-add:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.todo-add-complete input:checked~.complete-todo-btn-add:after {
+  display: block;
+}
+
+.todo-add-complete .complete-todo-btn-add:after {
+  left: 7px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+.todo-form-checkbox {
+  display: inline-block;
+  margin: 0;
+  margin-left: 10px;
+  width: auto;
+}
+
+.todo-form-complete-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-submit-btn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.form-submit-btn:hover {
+  background-color: #388e3c;
+}
+
+.todo-form-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .modal-heading {
   margin-bottom: 10px;
@@ -216,6 +371,7 @@ header h1 {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -225,6 +381,7 @@ header h1 {
   from {
     top: -300px;
   }
+
   to {
     top: 0;
   }
@@ -234,12 +391,11 @@ header h1 {
   from {
     top: 0;
   }
+
   to {
     top: -300px;
   }
 }
-
-
 
 .project-modal-input {
   flex: 1;
@@ -432,12 +588,12 @@ header h1 {
   border: 2px solid #777;
 }
 
-.complete-checkbox:hover input ~ .complete-todo-btn {
+.complete-checkbox:hover input~.complete-todo-btn {
   background-color: #f7f7f7;
   cursor: pointer;
 }
 
-.complete-checkbox input:checked ~ .complete-todo-btn {
+.complete-checkbox input:checked~.complete-todo-btn {
   background-color: #4CAF50;
 }
 
@@ -447,7 +603,7 @@ header h1 {
   display: none;
 }
 
-.complete-checkbox input:checked ~ .complete-todo-btn:after {
+.complete-checkbox input:checked~.complete-todo-btn:after {
   display: block;
 }
 
@@ -465,7 +621,7 @@ header h1 {
   display: none;
 }
 
-.complete-checkbox input:checked ~ .complete-todo-btn:after {
+.complete-checkbox input:checked~.complete-todo-btn:after {
   display: block;
 }
 
@@ -481,13 +637,6 @@ header h1 {
   transform: rotate(45deg);
 }
 
-.todo .change-priority-btn {
-  color: #FFC107;
-}
-
-.todo .delete-todo-btn {
-  color: #F44336;
-}
 
 .todo-priority {
   display: flex;
@@ -495,14 +644,6 @@ header h1 {
   align-items: center;
 }
 
-.priority-circle {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 5px;
-  background-color: gray;
-}
 
 .priority-select {
   width: 40%;
@@ -514,17 +655,17 @@ header h1 {
   width: 150px;
 }
 
-.priority-select:has(option[value="high"]:checked) {
+.priority-select:has(option[value="high"]:checked), .todo-form-select.high {
   background-color: #ff6060;
   color: white;
 }
 
-.priority-select:has(option[value="medium"]:checked) {
+.priority-select:has(option[value="medium"]:checked), .todo-form-select.medium {
   background-color: rgb(247, 186, 73);
   color: #444444;
 }
 
-.priority-select:has(option[value="low"]:checked) {
+.priority-select:has(option[value="low"]:checked), .todo-form-select.low {
   background-color: rgb(62, 163, 62);
   color: white;
 }
@@ -585,6 +726,7 @@ footer p {
   .container {
     display: block;
   }
+
   #projects {
     width: 100%;
     float: none;

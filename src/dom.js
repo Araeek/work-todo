@@ -96,4 +96,25 @@ function expandTodo(projectIndex, todoIndex) {
   //     `;
 }
 
+const todoFormPrioirity = document.querySelector(".todo-form-select");
+todoFormPrioirity.addEventListener("change", function(){
+  switch (this.value) {
+    case "high":
+      this.classList.remove("medium");
+      this.classList.remove("low");
+      this.classList.add("high");
+      break;
+    case "medium":
+      this.classList.add("medium");
+      this.classList.remove("low");
+      this.classList.remove("high");
+      break;
+    case "low":
+      this.classList.remove("medium");
+      this.classList.add("low");
+      this.classList.remove("high");
+      break;
+  }
+})
+
 export { updateProjects, updateTodos, expandTodo };

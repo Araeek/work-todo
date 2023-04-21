@@ -17,37 +17,68 @@
       <div class="project-header">
         <h2>Projects</h2>
         <button id="project-add-btn" class="add-project-btn"><i class="fas fa-plus"></i></button>
-        <div id="project-add" class="project-modal">
-          <div class="project-modal-content">
-            <span class="close-span">&times;</span>
-            <h2 class="modal-heading">Add Project</h2>
-            <form id="project-add-form">
-              <label for="project-name" class="modal-label">Project Name:</label>
-              <input type="text" id="project-name" class="modal-input">
-              <button type="submit" class="project-modal-submit-btn">Add</button>
-            </form>
-          </div>
+      </div>
+      <div id="project-add" class="project-modal">
+        <div class="project-modal-content">
+          <span class="close-span">&times;</span>
+          <h2 class="modal-heading">Add Project</h2>
+          <form id="project-add-form">
+            <label for="project-name" class="modal-label">Project Name:</label>
+            <input type="text" id="project-name" class="modal-input">
+            <button type="submit" class="project-modal-submit-btn">Add</button>
+          </form>
         </div>
-        <div id="project-edit" class="project-modal">
-          <div class="project-modal-content">
-            <span class="close-span">&times;</span>
-            <h2 class="modal-heading">Edit Project</h2>
-            <form id="project-edit-form">
-              <label for="project-name" class="modal-label">Project Name:</label>
-              <input type="text" id="project-edit-name" class="modal-input">
-              <button type="submit" class="project-modal-submit-btn">Edit</button>
-            </form>
-          </div>
-        </div>
-        <div id="todo-add" class="todo-modal">
-          <div class="todo-modal-content">
-            <span class="close-span">&times;</span>
-          </div>
+      </div>
+      <div id="project-edit" class="project-modal">
+        <div class="project-modal-content">
+          <span class="close-span">&times;</span>
+          <h2 class="modal-heading">Edit Project</h2>
+          <form id="project-edit-form">
+            <label for="project-name" class="modal-label">Project Name:</label>
+            <input type="text" id="project-edit-name" class="modal-input">
+            <button type="submit" class="project-modal-submit-btn">Edit</button>
+          </form>
         </div>
       </div>
       <div id="project-list"></div>
     </div>
-
+    <div id="todo-add" class="todo-modal">
+      <div class="todo-modal-content">
+        <form class="todo-task-form">
+          <span class="close-span">&times;</span>
+          <div class="todo-form-container">
+            <h2 class="todo-form-heading">Add New Task</h2>
+            <div class="form-group">
+              <label for="title" class="todo-form-label">Title</label>
+              <input type="text" id="title" name="title" class="todo-form-input" placeholder="Enter task title"
+                required>
+            </div>
+            <div class="form-group">
+              <label for="due-date" class="todo-form-label">Due Date</label>
+              <input type="date" id="due-date" name="due-date" class="todo-form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="priority" class="todo-form-label">Priority</label>
+              <select id="priority" name="priority" class="todo-form-select">
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div class="form-group todo-form-complete-group">
+              <label class="todo-add-complete" for="complete">
+                <label class="todo-form-label" for="complete">Complete</label>
+                <input type="checkbox" id="complete" name="complete" class="todo-form-checkbox">
+                <span class="complete-todo-btn-add"></span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group todo-form-submit">
+            <button type="submit" class="form-submit-btn">Add Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
     <div id="todo-list">
       <header class="todo-list-header">
         <div class="project-title-section">
