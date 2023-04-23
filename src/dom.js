@@ -26,7 +26,7 @@ function updateTodos(projectIndexNumber) {
   const todoListDiv = document.querySelector(".todo-container");
   const projectTitle = document.querySelector("#project-title");
   projectTitle.textContent = `${projects[projectIndexNumber].name}`;
-  document.querySelector(".edit-project-btn").dataset.projectIndex = `${projectIndexNumber}`;
+  document.querySelector(".project-title-section").dataset.projectIndex = `${projectIndexNumber}`;
   todoListDiv.innerHTML = "";
   for (let i = 0; i < projects[projectIndexNumber].todos.length; i++) {
     const todoDiv = document.createElement("div");
@@ -53,7 +53,7 @@ function updateTodos(projectIndexNumber) {
                   ? "selected"
                   : ""
               }>
-              <div class="priority-circle priority-medium"></div>
+              <div class="priority-medium"></div>
               <p class="priority-text-medium">medium</p>
               </option>
               <option value="low" ${
@@ -70,7 +70,7 @@ function updateTodos(projectIndexNumber) {
           <div class="todo-actions">
             <label class="complete-checkbox">
               <span class="complete-label-text">Complete</span>
-              <input type="checkbox" name="checkbox">
+              <input type="checkbox" name="checkbox" ${projects[projectIndexNumber].todos[i].complete ? "checked" : ""}>
               <span class="complete-todo-btn"></span>
             </label>
             <button class="edit-todo-btn" data-project-index="${projectIndexNumber}">

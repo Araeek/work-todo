@@ -1,6 +1,7 @@
-import { projects } from "./app";
+import { addTodoToProject, projects } from "./app";
 import { updateProjects, updateTodos } from "./dom";
 import { addProject, removeProject, editProjectName } from "./app";
+import { Todo } from "./todo";
 
 const projectAddModal = document.getElementById("project-add");
 const projectEditModal = document.getElementById("project-edit");
@@ -12,6 +13,7 @@ const projectList = document.querySelector("#project-list");
 const editHeader = document.querySelector(".edit-project-btn");
 const addTodoBtn = document.querySelector(".add-todo-btn");
 const todoAddModal = document.querySelector("#todo-add");
+const todoAddForm = document.querySelector("#todo-add-form");
 
 projectAddBtn.onclick = function () {
   projectAddModal.classList.add("show");
@@ -71,17 +73,32 @@ addTodoBtn.addEventListener("click", function () {
 function editProject(e) {
   projectEditModal.classList.add("show");
   document.querySelector("#project-edit-name").value = `${
-    projects[e.target.parentNode.getAttribute("data-project-index")].name
+    projects[e.target.parentNode.parentNode.getAttribute("data-project-index")].name
   }`;
   projectEditForm.addEventListener("submit", function _listener(event) {
     event.preventDefault();
     projectEditModal.classList.remove("show");
     editProjectName(
-      e.target.parentNode.getAttribute("data-project-index"),
+      e.target.parentNode.parentNode.getAttribute("data-project-index"),
       document.querySelector("#project-edit-name").value
     );
     updateProjects();
-    updateTodos(e.target.parentNode.getAttribute("data-project-index"));
+    updateTodos(e.target.parentNode.parentNode.getAttribute("data-project-index"));
     projectEditForm.removeEventListener("submit", _listener);
   });
 }
+
+todoAddForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  todoAddModal.classList.remove("show");
+  const formData = new FormData(todoAddForm);
+  const values = Object.fromEntries(formData.entries());
+  const todo = new Todo(
+    values["title"],
+    values["due-date"],
+    values["priority"],
+    values["complete"]
+  );
+  addTodoToProject(document.querySelector(".project-title-section").dataset.projectIndex, todo);
+  updateTodos(document.querySelector(".project-title-section").dataset.projectIndex);
+});
