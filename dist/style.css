@@ -682,30 +682,6 @@ header h1 {
 }
 
 
-.todo .priority-high {
-  background-color: red;
-}
-
-.todo .priority-medium {
-  background-color: orange;
-}
-
-.todo .priority-low {
-  background-color: green;
-}
-
-.todo .priority-text-high {
-  color: red;
-}
-
-.todo .priority-text-medium {
-  color: orange;
-}
-
-.todo .priority-text-low {
-  color: green;
-}
-
 
 footer {
   background-color: #f34b21;

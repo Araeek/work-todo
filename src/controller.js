@@ -1,4 +1,10 @@
-import { addTodoToProject, projects } from "./app";
+import {
+  addTodoToProject,
+  changeTodoPriority,
+  completeTodo,
+  projects,
+  removeTodoFromProject,
+} from "./app";
 import { updateProjects, updateTodos } from "./dom";
 import { addProject, removeProject, editProjectName } from "./app";
 import { Todo } from "./todo";
@@ -14,6 +20,7 @@ const editHeader = document.querySelector(".edit-project-btn");
 const addTodoBtn = document.querySelector(".add-todo-btn");
 const todoAddModal = document.querySelector("#todo-add");
 const todoAddForm = document.querySelector("#todo-add-form");
+const todoContainer = document.querySelector(".todo-container");
 
 projectAddBtn.onclick = function () {
   projectAddModal.classList.add("show");
@@ -73,17 +80,17 @@ addTodoBtn.addEventListener("click", function () {
 function editProject(e) {
   projectEditModal.classList.add("show");
   document.querySelector("#project-edit-name").value = `${
-    projects[e.target.parentNode.parentNode.getAttribute("data-project-index")].name
+    projects[e.target.parentNode.getAttribute("data-project-index")].name
   }`;
   projectEditForm.addEventListener("submit", function _listener(event) {
     event.preventDefault();
     projectEditModal.classList.remove("show");
     editProjectName(
-      e.target.parentNode.parentNode.getAttribute("data-project-index"),
+      e.target.parentNode.getAttribute("data-project-index"),
       document.querySelector("#project-edit-name").value
     );
     updateProjects();
-    updateTodos(e.target.parentNode.parentNode.getAttribute("data-project-index"));
+    updateTodos(e.target.parentNode.getAttribute("data-project-index"));
     projectEditForm.removeEventListener("submit", _listener);
   });
 }
@@ -99,6 +106,39 @@ todoAddForm.addEventListener("submit", function (e) {
     values["priority"],
     values["complete"]
   );
-  addTodoToProject(document.querySelector(".project-title-section").dataset.projectIndex, todo);
-  updateTodos(document.querySelector(".project-title-section").dataset.projectIndex);
+  addTodoToProject(
+    document.querySelector(".todo-container").dataset.projectIndex,
+    todo
+  );
+  updateTodos(document.querySelector(".todo-container").dataset.projectIndex);
+});
+
+todoContainer.addEventListener("click", function (e) {
+  if (e.target.classList.contains("delete-todo")) {
+    const projectIndexToRemove =
+      document.querySelector(".todo-container").dataset.projectIndex;
+    const todoIndexToRemove =
+      e.target.parentNode.parentNode.parentNode.dataset.todoIndex;
+    removeTodoFromProject(projectIndexToRemove, todoIndexToRemove);
+    updateTodos(projectIndexToRemove);
+  }
+});
+
+todoContainer.addEventListener("change", function (e) {
+  const projectIndex = document.querySelector(".todo-container").dataset.projectIndex;
+  if (e.target.classList.contains("todo-complete")) {
+    const todoIndexToComplete =
+      e.target.parentNode.parentNode.parentNode.dataset.todoIndex;
+    completeTodo(projectIndex, todoIndexToComplete, e.target.checked);
+  }
+  if (e.target.classList.contains("priority-select")) {
+    const todoIndexToPriority =
+      e.target.parentNode.parentNode.dataset.todoIndex;
+    changeTodoPriority(
+      projectIndex,
+      todoIndexToPriority,
+      e.target.value
+    );
+  }
+  updateTodos(projectIndex);
 });

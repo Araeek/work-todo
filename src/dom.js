@@ -27,10 +27,13 @@ function updateTodos(projectIndexNumber) {
   const projectTitle = document.querySelector("#project-title");
   projectTitle.textContent = `${projects[projectIndexNumber].name}`;
   document.querySelector(".project-title-section").dataset.projectIndex = `${projectIndexNumber}`;
+  document.querySelector(".edit-project-btn").dataset.projectIndex = `${projectIndexNumber}`;
+  document.querySelector(".todo-container").dataset.projectIndex = `${projectIndexNumber}`;
   todoListDiv.innerHTML = "";
   for (let i = 0; i < projects[projectIndexNumber].todos.length; i++) {
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo");
+    todoDiv.dataset.todoIndex = i;
     todoDiv.innerHTML = `
           <h3>${projects[projectIndexNumber].todos[i].title}</h3>
           <p>
@@ -44,25 +47,19 @@ function updateTodos(projectIndexNumber) {
                 projects[projectIndexNumber].todos[i].priority === "high"
                   ? "selected"
                   : ""
-              }>
-              <div class="priority-circle priority-high"></div>
-              <p class="priority-text-high">high</p>
+              }>high
               </option>
               <option value="medium" ${
                 projects[projectIndexNumber].todos[i].priority === "medium"
                   ? "selected"
                   : ""
-              }>
-              <div class="priority-medium"></div>
-              <p class="priority-text-medium">medium</p>
+              }>medium
               </option>
               <option value="low" ${
                 projects[projectIndexNumber].todos[i].priority === "low"
                   ? "selected"
                   : ""
-              }>
-              <div class="priority-circle priority-low"></div>
-              <p class="priority-text-low">low</p>
+              }>low
               </option>
             </select>
             
@@ -70,14 +67,14 @@ function updateTodos(projectIndexNumber) {
           <div class="todo-actions">
             <label class="complete-checkbox">
               <span class="complete-label-text">Complete</span>
-              <input type="checkbox" name="checkbox" ${projects[projectIndexNumber].todos[i].complete ? "checked" : ""}>
+              <input class=todo-complete type="checkbox" name="checkbox" ${projects[projectIndexNumber].todos[i].complete ? "checked" : ""}>
               <span class="complete-todo-btn"></span>
             </label>
-            <button class="edit-todo-btn" data-project-index="${projectIndexNumber}">
+            <button class="edit-todo-btn">
               <i class="fas fa-edit"></i> 
             </button>
-            <button class="project-btn" data-project-index="${projectIndexNumber}">
-              <i class="fas fa-trash-alt"></i>
+            <button class="project-btn">
+              <i class="fas fa-trash-alt delete-todo"></i>
             </button>
           </div>
         `;

@@ -20,8 +20,8 @@ function addTodoToProject(projectIndex, todo) {
   projects[projectIndex].todos.push(todo);
 }
 
-function completeTodo(projectIndex, todoIndex) {
-  projects[projectIndex].todos[todoIndex].completed = true;
+function completeTodo(projectIndex, todoIndex, value) {
+  projects[projectIndex].todos[todoIndex].complete = value;
 }
 
 function changeTodoPriority(projectIndex, todoIndex, priority) {
