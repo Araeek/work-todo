@@ -35,9 +35,9 @@ function updateTodos(projectIndexNumber) {
     todoDiv.classList.add("todo");
     todoDiv.dataset.todoIndex = i;
     todoDiv.innerHTML = `
-          <h3>${projects[projectIndexNumber].todos[i].title}</h3>
+          <h3 class="todo-title">${projects[projectIndexNumber].todos[i].title}</h3>
           <p>
-            <input type="date" id="date" name="date" value=${
+            <input class="todo-date" type="date" id="date" name="date" value=${
               projects[projectIndexNumber].todos[i].dueDate
             }>
           </p>
@@ -71,7 +71,7 @@ function updateTodos(projectIndexNumber) {
               <span class="complete-todo-btn"></span>
             </label>
             <button class="edit-todo-btn">
-              <i class="fas fa-edit"></i> 
+              <i class="fas fa-edit edit-todo"></i> 
             </button>
             <button class="project-btn">
               <i class="fas fa-trash-alt delete-todo"></i>

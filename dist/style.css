@@ -527,7 +527,7 @@ header h1 {
   font-size: 16px;
 }
 
-.todo h3 {
+.todo .todo-title {
   margin: 0;
   width: 100%;
   font-size: 18px;

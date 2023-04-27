@@ -4,6 +4,8 @@ import {
   completeTodo,
   projects,
   removeTodoFromProject,
+  changeTodoDueDate,
+  changeTodoName,
 } from "./app";
 import { updateProjects, updateTodos } from "./dom";
 import { addProject, removeProject, editProjectName } from "./app";
@@ -122,10 +124,33 @@ todoContainer.addEventListener("click", function (e) {
     removeTodoFromProject(projectIndexToRemove, todoIndexToRemove);
     updateTodos(projectIndexToRemove);
   }
+
+  if (e.target.classList.contains("edit-todo")) {
+    const todoTitle = document.querySelector(".todo-title");
+    const inputEl = document.createElement("input");
+    inputEl.classList.add("todo-title");
+    inputEl.value = todoTitle.textContent;
+    todoTitle.replaceWith(inputEl);
+    inputEl.focus();
+    inputEl.addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter") {
+        const projectIndexToEdit =
+          document.querySelector(".todo-container").dataset.projectIndex;
+        const todoIndexToEdit =
+          e.target.parentNode.parentNode.parentNode.dataset.todoIndex;
+        changeTodoName(projectIndexToEdit, todoIndexToEdit, inputEl.value);
+        const newTitle = document.createElement("h3");
+        newTitle.textContent = inputEl.value;
+        inputEl.replaceWith(newTitle);
+        updateTodos(projectIndexToEdit);
+      }
+    });
+  }
 });
 
 todoContainer.addEventListener("change", function (e) {
-  const projectIndex = document.querySelector(".todo-container").dataset.projectIndex;
+  const projectIndex =
+    document.querySelector(".todo-container").dataset.projectIndex;
   if (e.target.classList.contains("todo-complete")) {
     const todoIndexToComplete =
       e.target.parentNode.parentNode.parentNode.dataset.todoIndex;
@@ -134,11 +159,11 @@ todoContainer.addEventListener("change", function (e) {
   if (e.target.classList.contains("priority-select")) {
     const todoIndexToPriority =
       e.target.parentNode.parentNode.dataset.todoIndex;
-    changeTodoPriority(
-      projectIndex,
-      todoIndexToPriority,
-      e.target.value
-    );
+    changeTodoPriority(projectIndex, todoIndexToPriority, e.target.value);
+  }
+  if (e.target.classList.contains("todo-date")) {
+    const todoIndexToDate = e.target.parentNode.parentNode.dataset.todoIndex;
+    changeTodoDueDate(projectIndex, todoIndexToDate, e.target.value);
   }
   updateTodos(projectIndex);
 });
