@@ -26,16 +26,29 @@ function updateTodos(projectIndexNumber) {
   const todoListDiv = document.querySelector(".todo-container");
   const projectTitle = document.querySelector("#project-title");
   projectTitle.textContent = `${projects[projectIndexNumber].name}`;
-  document.querySelector(".project-title-section").dataset.projectIndex = `${projectIndexNumber}`;
-  document.querySelector(".edit-project-btn").dataset.projectIndex = `${projectIndexNumber}`;
-  document.querySelector(".todo-container").dataset.projectIndex = `${projectIndexNumber}`;
+  document.querySelector(
+    ".project-title-section"
+  ).dataset.projectIndex = `${projectIndexNumber}`;
+  document.querySelector(
+    ".edit-project-btn"
+  ).dataset.projectIndex = `${projectIndexNumber}`;
+  document.querySelector(
+    ".todo-container"
+  ).dataset.projectIndex = `${projectIndexNumber}`;
   todoListDiv.innerHTML = "";
+  if (projects[projectIndexNumber].todos.length === 0) {
+    todoListDiv.innerHTML = "<h3 class='first-todo'>Click on <span>Add Todo + </span>button to add your first todo to project</h3>"
+  } else {
+    
+  }
   for (let i = 0; i < projects[projectIndexNumber].todos.length; i++) {
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo");
     todoDiv.dataset.todoIndex = i;
     todoDiv.innerHTML = `
-          <h3 class="todo-title">${projects[projectIndexNumber].todos[i].title}</h3>
+          <h3 class="todo-title">${
+            projects[projectIndexNumber].todos[i].title
+          }</h3>
           <p>
             <input class="todo-date" type="date" id="date" name="date" value=${
               projects[projectIndexNumber].todos[i].dueDate
@@ -67,7 +80,9 @@ function updateTodos(projectIndexNumber) {
           <div class="todo-actions">
             <label class="complete-checkbox">
               <span class="complete-label-text">Complete</span>
-              <input class=todo-complete type="checkbox" name="checkbox" ${projects[projectIndexNumber].todos[i].complete ? "checked" : ""}>
+              <input class=todo-complete type="checkbox" name="checkbox" ${
+                projects[projectIndexNumber].todos[i].complete ? "checked" : ""
+              }>
               <span class="complete-todo-btn"></span>
             </label>
             <button class="edit-todo-btn">
@@ -94,7 +109,7 @@ function expandTodo(projectIndex, todoIndex) {
 }
 
 const todoFormPrioirity = document.querySelector(".todo-form-select");
-todoFormPrioirity.addEventListener("change", function(){
+todoFormPrioirity.addEventListener("change", function () {
   switch (this.value) {
     case "high":
       this.classList.remove("medium");
@@ -112,6 +127,6 @@ todoFormPrioirity.addEventListener("change", function(){
       this.classList.remove("high");
       break;
   }
-})
+});
 
 export { updateProjects, updateTodos, expandTodo };

@@ -6,6 +6,7 @@ import {
   removeTodoFromProject,
   changeTodoDueDate,
   changeTodoName,
+  saveToStorage,
 } from "./app";
 import { updateProjects, updateTodos } from "./dom";
 import { addProject, removeProject, editProjectName } from "./app";
@@ -53,12 +54,14 @@ projectAddForm.addEventListener("submit", function (event) {
   projectAddModal.classList.remove("show");
   addProject(document.querySelector("#project-name").value);
   updateProjects();
+  saveToStorage();
 });
 
 projectList.addEventListener("click", function (e) {
   if (e.target.classList.contains("delete")) {
     removeProject(e.target.parentNode.getAttribute("data-project-index"));
     updateProjects();
+    saveToStorage();
   }
   if (e.target.classList.contains("edit")) {
     editProject(e);
@@ -95,6 +98,7 @@ function editProject(e) {
     updateTodos(e.target.parentNode.getAttribute("data-project-index"));
     projectEditForm.removeEventListener("submit", _listener);
   });
+  saveToStorage();
 }
 
 todoAddForm.addEventListener("submit", function (e) {
@@ -113,6 +117,7 @@ todoAddForm.addEventListener("submit", function (e) {
     todo
   );
   updateTodos(document.querySelector(".todo-container").dataset.projectIndex);
+  saveToStorage();
 });
 
 todoContainer.addEventListener("click", function (e) {
@@ -123,6 +128,7 @@ todoContainer.addEventListener("click", function (e) {
       e.target.parentNode.parentNode.parentNode.dataset.todoIndex;
     removeTodoFromProject(projectIndexToRemove, todoIndexToRemove);
     updateTodos(projectIndexToRemove);
+    saveToStorage();
   }
 
   if (e.target.classList.contains("edit-todo")) {
@@ -143,6 +149,7 @@ todoContainer.addEventListener("click", function (e) {
         newTitle.textContent = inputEl.value;
         inputEl.replaceWith(newTitle);
         updateTodos(projectIndexToEdit);
+        saveToStorage();
       }
     });
   }
@@ -166,4 +173,5 @@ todoContainer.addEventListener("change", function (e) {
     changeTodoDueDate(projectIndex, todoIndexToDate, e.target.value);
   }
   updateTodos(projectIndex);
+  saveToStorage();
 });

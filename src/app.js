@@ -1,11 +1,13 @@
 import { Project } from "./project.js";
 import { defaultProject } from "./defaultProject.js";
 
-const projects = [defaultProject];
+const projects = JSON.parse(localStorage.getItem("projects")) || [];
+
 
 function addProject(name) {
   const project = new Project(name);
   projects.push(project);
+  saveToStorage();
 }
 
 function removeProject(index) {
@@ -40,6 +42,10 @@ function removeTodoFromProject(projectIndex, todoIndex) {
   projects[projectIndex].todos.splice(todoIndex, 1);
 }
 
+function saveToStorage() {
+  localStorage.setItem("projects", JSON.stringify(projects));
+}
+
 export {
   addProject,
   removeProject,
@@ -50,5 +56,6 @@ export {
   removeTodoFromProject,
   changeTodoDueDate,
   changeTodoName,
+  saveToStorage,
   projects,
 };
