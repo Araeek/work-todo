@@ -515,6 +515,17 @@ header h1 {
   flex: 3;
 }
 
+.first-todo {
+  font-size: 23px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.first-todo span{
+  font-weight: bold;
+  color: #449b47;
+}
+
 .todo {
   display: flex;
   align-items: center;
