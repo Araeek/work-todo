@@ -132,7 +132,9 @@ todoContainer.addEventListener("click", function (e) {
   }
 
   if (e.target.classList.contains("edit-todo")) {
-    const todoTitle = document.querySelector(".todo-title");
+    console.log();
+    const todoTitle =
+      e.target.parentNode.parentNode.parentNode.querySelector(".todo-title");
     const inputEl = document.createElement("input");
     inputEl.classList.add("todo-title");
     inputEl.value = todoTitle.textContent;
